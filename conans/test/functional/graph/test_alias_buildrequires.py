@@ -36,7 +36,9 @@ class AliasBuildRequiresTestCase(unittest.TestCase):
         t.run('export testFrameworkForC.py testFrameworkForC/conan@')
 
         t.run('export libD.py libD/conan@')
-        t.run('info app.py')
-
+        t.run('info app.py --only requires')
         print(t.current_folder)
+        print(t.out)
+
+        t.run('create app.py app/version@ --build=missing')
         print(t.out)
