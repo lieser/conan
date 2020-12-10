@@ -11,12 +11,12 @@ class AliasBuildRequiresTestCase(unittest.TestCase):
         t.save({
             'libA.py': GenConanfile(),
             'libB.py': GenConanfile().with_requires("libA/[^7.1.0]"),
-            'libC.py': GenConanfile().with_requires("libA/[^7.1.0]", "libB/[^4.2.0]"),
+            'libC.py': GenConanfile().with_requires("libB/[^4.2.0]", "libA/[^7.1.0]"),
             'testFrameworkForC.py': GenConanfile()
-                .with_requires("libA/7.1.0+alias", "libB/4.2.0+alias"),
-            'libD.py': GenConanfile().with_requires("libA/[^7.1.0]", "libB/[^4.2.0]",
-                                                    "libC/[^4.1.0]")
-                .with_build_requirement("testFrameworkForC/conan", force_host_context=True),
+                .with_requires("libC/[^4.1.0]", "libB/[^4.2.0]"),
+            'libD.py': GenConanfile().with_requires("libC/[^4.1.0]", "libB/[^4.2.0]",
+                                                    "libA/[^7.1.0]")
+                .with_build_requirement("testFrameworkForC/[^1.1.0]", force_host_context=True),
             'app.py': GenConanfile().with_requires("libA/conan", "libB/conan", "libC/conan",
                                                    "libD/conan")
                 .with_build_requirement("testFrameworkForC/conan", force_host_context=True),
