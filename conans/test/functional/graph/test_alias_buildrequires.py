@@ -34,6 +34,7 @@ class AliasBuildRequiresTestCase(unittest.TestCase):
         t.run('alias libA/7.1.0+alias@ libA/conan@')
         t.run('alias libB/4.2.0+alias@ libB/conan@')
         t.run('export testFrameworkForC.py testFrameworkForC/conan@')
+        t.run('alias testFrameworkForC/1.1.0+alias@ testFrameworkForC/conan@')
 
         t.run('export libD.py libD/conan@')
         t.run('info app.py --only requires')
